@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Write With Your Voice"
+        android:id="@+id/writeWithVoice"
+        android:icon="@drawable/baseline_mic_24"/>
+
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Text To Speech"
+        android:id="@+id/textToSpeech"
+        android:icon="@drawable/baseline_spatial_audio_off_24"/>
+
+
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Users Chat"
+        android:id="@+id/UsersChat"
+        android:icon="@drawable/baseline_chat_24"/>
+</menu>

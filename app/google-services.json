@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "766788620797",
+    "project_id": "yourultimateassistant-8af16",
+    "storage_bucket": "yourultimateassistant-8af16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766788620797:android:bfc3678663d327d8f48994",
+        "android_client_info": {
+          "package_name": "com.example.YourUltimateAssistant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiYPc2OQgaX5_1XRW2Ejoc0EeQ5f4b7bc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    tools:context=".InApp.FirstAppActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="351dp"
+        android:layout_height="297dp"
+        android:background="@drawable/popup_round"
+        android:backgroundTint="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/archivo_black"
+            android:text="Change Nickname"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/newNickname"
+            android:layout_width="212dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="-280dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/edit_round"
+            android:backgroundTint="#03A9F4"
+            android:ems="10"
+            android:fontFamily="@font/archivo_black"
+            android:hint="New Nickname"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:maxLength="8"
+
+            ></EditText>
+
+        <Button
+            android:id="@+id/setNicknameBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="-205dp"
+            android:layout_marginTop="200dp"
+            android:fontFamily="@font/archivo_black"
+            android:text="set nickname"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"></Button>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="79dp"
+        android:layout_height="83dp"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        android:progressTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

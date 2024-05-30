@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/chat_background">
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#0B1C24"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+
+        <ImageButton
+            android:id="@+id/backToChatBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/user_circle"
+            android:backgroundTint="#353839"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:tint="#FFFFFF" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            android:fontFamily="@font/baloo_bhai"
+            android:text="Your Ultimate Assistant Users"
+            android:textColor="@color/white"
+            android:textSize="21dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="-50dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/your_ultimate_assistant_logo"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/usersListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    android:id="@+id/frame"
+    tools:context=".Settings.SettingsFragment" >
+
+    <LinearLayout
+        android:layout_width="348dp"
+        android:layout_height="609dp"
+        android:background="@drawable/popup_round"
+        android:backgroundTint="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="224dp"
+            android:layout_height="224dp"
+            android:layout_marginStart="62.5dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="TODO"
+            android:foreground="@drawable/your_ultimate_assistant_logo" />
+
+        <Switch
+            android:id="@+id/getANotify"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Want a notification?"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:fontFamily="@font/archivo_black"
+            android:textSize="16dp"
+            android:textColor="#03A9F4"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/baseline_notifications_24"
+            android:drawableTint="#03A9F4"
+            />
+        <Button
+            android:id="@+id/changePassword"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/archivo_black"
+            android:text="Change Password"
+            android:textSize="14dp"
+            tools:ignore="TextSizeCheck" />
+
+        <Button
+
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:text="Change Nickname"
+            android:id="@+id/changeNickname"
+            android:textSize="14dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/archivo_black"/>
+
+        <Button
+
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:text="Change Phone Number"
+            android:id="@+id/changePhoneNumber"
+            android:textSize="14dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/archivo_black"/>
+
+        <Button
+
+            android:id="@+id/historyBtn"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:text="History"
+            android:textSize="14dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/archivo_black"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:text="Version 0.1"
+            android:textSize="15dp"
+            android:layout_marginStart="120dp"
+            android:textAlignment="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/archivo_black"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>
