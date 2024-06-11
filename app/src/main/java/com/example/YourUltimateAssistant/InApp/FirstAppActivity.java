@@ -2,6 +2,7 @@ package com.example.YourUltimateAssistant.InApp;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -65,34 +66,45 @@ public class FirstAppActivity extends AppCompatActivity {
 
     // Method to set reminder notification
     public static void reminderNotificationSet(Context context) {
+
+        setDailyNotification(context);
+    }
+
+    // Method to set alarm manager for notification
+
+    public static void setDailyNotification(Context context) {
+
         FirebaseUtils.getUserFromFirestore().get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+
                 UserModel userModel = task.getResult().toObject(UserModel.class);
+                Intent intent = new Intent(context, NotificationReceiver.class);
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
                 if (userModel.isNotificationsAllowed()) {
-                    setNotifyManager(context);
+
+                        // Set the time for notification
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(System.currentTimeMillis());
+                        calendar.set(Calendar.HOUR_OF_DAY, 16);  // 4 PM
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+
+                        // If the set time is before the current time, add one day to it
+                        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+                            calendar.add(Calendar.DAY_OF_MONTH, 1);
+                        }
+
+                        // Set repeating alarm manager for notification
+                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+                }
+                else{
+                    alarmManager.cancel(pendingIntent);
                 }
             }
         });
     }
 
-    // Method to set alarm manager for notification
-    public static void setNotifyManager(Context context) {
-
-        // Set the time for notification
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 16);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-
-        // Set repeating alarm manager for notification
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context.getApplicationContext(), NotificationReceiver.class);
-
-        // Specify FLAG_IMMUTABLE for the PendingIntent
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-    }
 }

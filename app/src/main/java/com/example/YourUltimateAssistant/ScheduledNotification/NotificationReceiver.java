@@ -10,16 +10,11 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import androidx.core.app.NotificationCompat;
 import android.widget.RemoteViews;
 
-import androidx.core.app.NotificationCompat;
-
 import com.example.YourUltimateAssistant.InApp.FirstAppActivity;
-import com.example.YourUltimateAssistant.Models.UserModel;
 import com.example.YourUltimateAssistant.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
@@ -34,7 +29,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     private Notification createNotification(Context context) {
         // Intent to open FirstAppActivity when notification is clicked
         Intent intent = new Intent(context, FirstAppActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_IMMUTABLE);
 
         // RemoteViews for custom notification layout
         RemoteViews notificationLayout = new RemoteViews(context.getPackageName(), R.layout.small_notification_layout);
@@ -43,7 +38,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         // Build the notification using NotificationCompat.Builder
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setSmallIcon(R.drawable.your_ultimate_assistant_logo)
+                .setSmallIcon(R.drawable.your_ultimate_assistant_logo) // Replace with your app's icon
                 .setContentIntent(pendingIntent)
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                 .setCustomContentView(notificationLayout)
