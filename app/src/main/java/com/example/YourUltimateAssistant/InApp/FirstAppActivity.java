@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.YourUltimateAssistant.Models.UserModel;
-import com.example.YourUltimateAssistant.R;
 import com.example.YourUltimateAssistant.ScheduledNotification.NotificationReceiver;
 import com.example.YourUltimateAssistant.Settings.SettingsFragment;
 import com.example.YourUltimateAssistant.Utils.FirebaseUtils;
@@ -75,9 +74,9 @@ public class FirstAppActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
 
                 UserModel userModel = task.getResult().toObject(UserModel.class);
-                Intent intent;
-                AlarmManager alarmManager = null;
-                PendingIntent pendingIntent = null;
+                Intent intent = new Intent(context, NotificationReceiver.class);
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                 if (userModel.isNotificationsAllowed()) {
 
@@ -92,9 +91,6 @@ public class FirstAppActivity extends AppCompatActivity {
                         if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
                             calendar.add(Calendar.DAY_OF_MONTH, 1);
                         }
-                        intent = new Intent(context, NotificationReceiver.class);
-                        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                        pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                         // Set repeating alarm manager for notification
                         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
