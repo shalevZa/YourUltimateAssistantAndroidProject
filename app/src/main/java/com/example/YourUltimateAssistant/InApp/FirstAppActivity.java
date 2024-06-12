@@ -2,20 +2,16 @@ package com.example.YourUltimateAssistant.InApp;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.YourUltimateAssistant.Models.UserModel;
 import com.example.YourUltimateAssistant.R;
 import com.example.YourUltimateAssistant.ScheduledNotification.NotificationReceiver;
 import com.example.YourUltimateAssistant.Settings.SettingsFragment;
 import com.example.YourUltimateAssistant.Utils.FirebaseUtils;
-import com.example.YourUltimateAssistant.Utils.InternetConnection;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
@@ -72,15 +68,16 @@ public class FirstAppActivity extends AppCompatActivity {
 
     // Method to set alarm manager for notification
 
+    @SuppressLint("SuspiciousIndentation")
     public static void setDailyNotification(Context context) {
 
         FirebaseUtils.getUserFromFirestore().get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
                 UserModel userModel = task.getResult().toObject(UserModel.class);
-                Intent intent = new Intent(context, NotificationReceiver.class);
-                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                Intent intent;
+                AlarmManager alarmManager = null;
+                PendingIntent pendingIntent = null;
 
                 if (userModel.isNotificationsAllowed()) {
 
@@ -95,12 +92,16 @@ public class FirstAppActivity extends AppCompatActivity {
                         if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
                             calendar.add(Calendar.DAY_OF_MONTH, 1);
                         }
+                        intent = new Intent(context, NotificationReceiver.class);
+                        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                        pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                         // Set repeating alarm manager for notification
                         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
                 }
                 else{
+                    if(alarmManager != null)
                     alarmManager.cancel(pendingIntent);
                 }
             }
