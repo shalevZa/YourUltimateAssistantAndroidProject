@@ -170,24 +170,31 @@ public class UsersChat extends AppCompatActivity {
             });
 
             deleteMessage.setOnClickListener(v -> {
-                FirebaseFirestore.getInstance().collection("UsersChat").whereEqualTo("message" , message)
-                        .get().addOnCompleteListener(task -> {
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                if(!(itemView.findViewById(R.id.otherPeopleMessageTextView) != null)){
+                    FirebaseFirestore.getInstance().collection("UsersChat").whereEqualTo("message", message)
+                            .get().addOnCompleteListener(task -> {
 
-                                if (message.equals(document.getString("message"))) {
-                                    DocumentReference documentReference = FirebaseUtils.getUserFromFirestore().collection("UsersChat").document(document.getId());
-                                    documentReference.delete().addOnCompleteListener(task1 -> {
-                                        if (task1.isSuccessful()) {
-                                            Toast.makeText(UsersChat.this, "Deleted!!", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(UsersChat.this, "Error!!", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                    if (message.equals(document.getString("message"))) {
+                                        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("UsersChat").document(document.getId());
+                                        documentReference.delete().addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                UsersChatAdapter.addMessageToListView(getBaseContext(), FirebaseUtils.getCurrentUserId(), chatListView);
+                                                Toast.makeText(this, "Deleted!!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(this, "Error!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+
                                 }
-                            }
-                });
+                            });
 
+                }
+                else
+                    Toast.makeText(this , "You can delete just your messages" , Toast.LENGTH_SHORT).show();
 
             });
         }
