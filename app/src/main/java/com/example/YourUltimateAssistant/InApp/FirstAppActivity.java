@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.YourUltimateAssistant.Models.UserModel;
+import com.example.YourUltimateAssistant.R;
 import com.example.YourUltimateAssistant.ScheduledNotification.NotificationReceiver;
 import com.example.YourUltimateAssistant.Settings.SettingsFragment;
 import com.example.YourUltimateAssistant.Utils.FirebaseUtils;
@@ -97,8 +98,7 @@ public class FirstAppActivity extends AppCompatActivity {
 
                 }
                 else{
-                    if(alarmManager != null)
-                    alarmManager.cancel(pendingIntent);
+                        alarmManager.cancel(pendingIntent);
                 }
             }
         });

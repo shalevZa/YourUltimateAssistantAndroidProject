@@ -54,7 +54,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         // Get NotificationManager
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Create notification channel for Android Oreo and above
+        // Create notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("channel_id", "Your Ultimate Assistant Reminder", NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
