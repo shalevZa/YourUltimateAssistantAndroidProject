@@ -168,6 +168,28 @@ public class UsersChat extends AppCompatActivity {
                 FirebaseUtils.getUserFromFirestore().collection("Saved Messages").document().set(savedMessage)
                         .addOnCompleteListener(task -> Toast.makeText(UsersChat.this, "Saved", Toast.LENGTH_SHORT).show());
             });
+
+            deleteMessage.setOnClickListener(v -> {
+                FirebaseFirestore.getInstance().collection("UsersChat").whereEqualTo("message" , message)
+                        .get().addOnCompleteListener(task -> {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                if (message.equals(document.getString("message"))) {
+                                    DocumentReference documentReference = FirebaseUtils.getUserFromFirestore().collection("UsersChat").document(document.getId());
+                                    documentReference.delete().addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            Toast.makeText(UsersChat.this, "Deleted!!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(UsersChat.this, "Error!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+                });
+
+
+            });
         }
     }
 
