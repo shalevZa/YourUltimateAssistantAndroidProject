@@ -63,8 +63,19 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="180dp"
-            android:layout_marginStart="-125dp"
+            android:layout_marginStart="-160dp"
             android:src="@drawable/baseline_delete_24"
+            android:background="#1E1F22"
+            app:tint="@color/white" />
+
+
+        <ImageView
+            android:id="@+id/textToSpeechBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/baseline_spatial_audio_off_24"
             android:background="#1E1F22"
             app:tint="@color/white" />
 

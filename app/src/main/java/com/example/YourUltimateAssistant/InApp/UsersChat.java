@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.*;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
@@ -28,12 +30,14 @@ public class UsersChat extends AppCompatActivity {
     // UI elements
     ImageButton backToHomeBtn, refreshBtn;
     EditText messageLine;
-    ImageView closeReplayLayout;
+    ImageView closeReplayLayout , speechToTextBtn;
     ImageButton sendBtn;
     ListView chatListView;
     TextView lineReplayLinearText;
     LinearLayout lineReplayLinearlayout;
     TextView usersChatText;
+    TextToSpeech textToSpeech;
+
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -54,6 +58,12 @@ public class UsersChat extends AppCompatActivity {
         lineReplayLinearlayout = findViewById(R.id.lineReplayLinearlayout);
         closeReplayLayout = findViewById(R.id.closeReplayLayout);
         usersChatText = findViewById(R.id.usresChatUsersLink);
+        speechToTextBtn = findViewById(R.id.speechToTextBtn);
+
+        speechToTextBtn.setOnClickListener(v -> {
+            // Initiate speech recognition
+            speak();
+        });
 
         // Set click listener for closing replay layout
         closeReplayLayout.setOnClickListener(v -> lineReplayLinearlayout.setVisibility(View.GONE));
@@ -145,6 +155,7 @@ public class UsersChat extends AppCompatActivity {
             Button replayBtn = dialog.findViewById(R.id.replayBtn);
             Button saveInHistoryBtn = dialog.findViewById(R.id.saveInHistory);
             ImageView deleteMessage = dialog.findViewById(R.id.deleteMessageBtn);
+            ImageView textToSpeechBtn = dialog.findViewById(R.id.textToSpeechBtn);
 
             // Set onClickListener for copyBtn to copy the message to clipboard
             copyBtn.setOnClickListener(v -> {
@@ -197,6 +208,34 @@ public class UsersChat extends AppCompatActivity {
                     Toast.makeText(this , "You can delete just your messages" , Toast.LENGTH_SHORT).show();
 
             });
+
+            textToSpeechBtn.setOnClickListener(v -> {
+                textToSpeech = new TextToSpeech(this, i -> {
+                    if (i != TextToSpeech.ERROR) {
+                        textToSpeech.setLanguage(Locale.ENGLISH);
+                        textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, null);
+                    }
+                });
+            });
+
+        }
+    }
+    // Method to initiate speech recognition
+    private void speak() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hi, speak something...");
+        startActivityForResult(intent, 1000);
+    }
+
+    // Handle the result of speech recognition
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && resultCode == RESULT_OK && data != null) {
+            ArrayList result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            messageLine.setText("  " + (String) result.get(0));
         }
     }
 

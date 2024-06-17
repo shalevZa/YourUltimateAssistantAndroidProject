@@ -16,8 +16,10 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_marginBottom="10dp"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="5dp"
     android:layout_marginEnd="60dp"
+    android:background="@drawable/button_round"
+    android:backgroundTint="#8C8888"
     android:orientation="vertical">
 
     <LinearLayout
@@ -52,20 +54,36 @@
             android:background="#3AA63F"/>
     </LinearLayout>
 
+
         <EditText
-        android:id="@+id/messageLine"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/button_round"
-        android:backgroundTint="#B28C8888"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        android:hint="  Write your message here..."
-        android:textColorHint="@color/white"
-        android:textSize="20dp"/>
+            android:id="@+id/messageLine"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#B28C8888"
+            android:drawableTint="#FFFFFF"
+            android:hint="  Write your message here..."
+            android:layout_marginStart="50dp"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="20dp" />
 
 </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/speechToTextBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/baseline_mic_24"
+        app:tint="#FFFFFF" />
 
     <ImageButton
         android:id="@+id/sendBtn"
@@ -75,6 +93,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
+        android:contentDescription="TODO"
         android:src="@drawable/baseline_send_24"
         android:background="@drawable/user_circle"
         app:tint="#FFFFFF"
@@ -109,6 +128,7 @@
             android:layout_marginTop="5dp"
             android:backgroundTint="#353839"
             android:background="@drawable/user_circle"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/baseline_home_24"
             app:tint="#FFFFFF" />
 
@@ -121,6 +141,7 @@
             android:layout_marginStart="10dp"
             android:backgroundTint="#353839"
             android:background="@drawable/user_circle"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/baseline_refresh_24"
             app:tint="#FFFFFF" />
 

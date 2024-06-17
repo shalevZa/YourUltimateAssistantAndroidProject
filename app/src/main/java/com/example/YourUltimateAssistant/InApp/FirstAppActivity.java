@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.YourUltimateAssistant.Models.UserModel;
 import com.example.YourUltimateAssistant.R;
@@ -38,11 +40,6 @@ public class FirstAppActivity extends AppCompatActivity {
 
 
         // Setup bottom navigation menu
-        menu();
-    }
-
-    // Method to setup bottom navigation menu
-    private void menu() {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.Home) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame, homeFragment).commit();
@@ -59,6 +56,8 @@ public class FirstAppActivity extends AppCompatActivity {
             return false;
         });
     }
+
+
 
     // Method to set reminder notification
     public static void reminderNotificationSet(Context context) {
